@@ -20,6 +20,7 @@
 		CCBC04602B5699D700677608 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBC045F2B5699D700677608 /* ListView.swift */; };
 		CCBC04622B5699F800677608 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBC04612B5699F800677608 /* ListViewController.swift */; };
 		CCBC04642B569A0300677608 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBC04632B569A0300677608 /* TableViewCell.swift */; };
+		CCBC04662B569D3000677608 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBC04652B569D3000677608 /* CoreDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		CCBC045F2B5699D700677608 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		CCBC04612B5699F800677608 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		CCBC04632B569A0300677608 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		CCBC04652B569D3000677608 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,11 +111,9 @@
 			children = (
 				CCBC04282B56992900677608 /* AppDelegate.swift */,
 				CCBC042A2B56992900677608 /* SceneDelegate.swift */,
-				CCBC045B2B5699A800677608 /* MainView.swift */,
-				CCBC045D2B5699BB00677608 /* MainViewController.swift */,
-				CCBC045F2B5699D700677608 /* ListView.swift */,
-				CCBC04612B5699F800677608 /* ListViewController.swift */,
-				CCBC04632B569A0300677608 /* TableViewCell.swift */,
+				CCBC04682B569D8000677608 /* Model */,
+				CCBC04672B569D3500677608 /* View */,
+				CCBC04692B569D9F00677608 /* Controller */,
 				CCBC04342B56992A00677608 /* Assets.xcassets */,
 				CCBC04362B56992A00677608 /* LaunchScreen.storyboard */,
 				CCBC04392B56992A00677608 /* Info.plist */,
@@ -137,6 +137,33 @@
 				CCBC044E2B56992A00677608 /* PersonCoreDataUITestsLaunchTests.swift */,
 			);
 			path = PersonCoreDataUITests;
+			sourceTree = "<group>";
+		};
+		CCBC04672B569D3500677608 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CCBC045B2B5699A800677608 /* MainView.swift */,
+				CCBC045F2B5699D700677608 /* ListView.swift */,
+				CCBC04632B569A0300677608 /* TableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CCBC04682B569D8000677608 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CCBC04652B569D3000677608 /* CoreDataManager.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CCBC04692B569D9F00677608 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				CCBC045D2B5699BB00677608 /* MainViewController.swift */,
+				CCBC04612B5699F800677608 /* ListViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -275,6 +302,7 @@
 				CCBC04602B5699D700677608 /* ListView.swift in Sources */,
 				CCBC04292B56992900677608 /* AppDelegate.swift in Sources */,
 				CCBC042B2B56992900677608 /* SceneDelegate.swift in Sources */,
+				CCBC04662B569D3000677608 /* CoreDataManager.swift in Sources */,
 				CCBC045E2B5699BB00677608 /* MainViewController.swift in Sources */,
 				CCBC04622B5699F800677608 /* ListViewController.swift in Sources */,
 			);
