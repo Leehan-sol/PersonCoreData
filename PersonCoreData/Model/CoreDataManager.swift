@@ -45,20 +45,24 @@ struct CoreDataManager {
     
     // 3. Update
     func updatePerson(name: String, age: String, index: Int) {
-         let fetchRequest = NSFetchRequest<PersonCoreData>(entityName: "PersonCoreData")
-         
-         do {
-             let result = try container.viewContext.fetch(fetchRequest)
-             if let personObject = result[index] as? NSManagedObject {
-                 personObject.setValue(name, forKey: "name")
-                 personObject.setValue(age, forKey: "age")
-                 
-                 try container.viewContext.save()
-             }
-         } catch {
-             print("Failed to update person: \(error)")
-         }
-     }
+        let fetchRequest = NSFetchRequest<PersonCoreData>(entityName: "PersonCoreData")
+        
+        do {
+            let result = try container.viewContext.fetch(fetchRequest)
+            if index < result.count {
+                let personObject = result[index]
+                personObject.setValue(name, forKey: "name")
+                personObject.setValue(age, forKey: "age")
+                
+                try container.viewContext.save()
+            } else {
+                print("Index out of bounds")
+            }
+        } catch {
+            print("Failed to update person: \(error)")
+        }
+    }
+
     
     // 4. Delete
     func deletePerson(person: PersonCoreData) {
