@@ -28,7 +28,7 @@ class ListViewController: UIViewController {
     }
     
     private func setPersonList() {
-        personList = CoreDataManager.manager.getPerson()
+        personList = CoreDataManager.shared.getPerson()
     }
 }
 
@@ -39,7 +39,7 @@ extension ListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             if let person = personList?[indexPath.row] {
-                CoreDataManager.manager.deletePerson(person: person)
+                CoreDataManager.shared.deletePerson(person: person)
                 setPersonList()
             }
             tableView.deleteRows(at: [indexPath], with: .fade)
@@ -89,7 +89,7 @@ extension ListViewController: UITableViewDataSource {
                 return
             }
             
-            CoreDataManager.manager.updatePerson(name: newName, age: newAge, index: index)
+            CoreDataManager.shared.updatePerson(name: newName, age: newAge, index: index)
             self.setPersonList()
             self.listView.tableView.reloadData()
         }

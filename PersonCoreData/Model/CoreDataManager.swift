@@ -9,22 +9,38 @@ import UIKit
 import CoreData
 
 struct CoreDataManager {
-    static let manager = CoreDataManager()
-    private let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    private var container: NSPersistentContainer!
+    static let shared = CoreDataManager()
+    private let persistentContainer: NSPersistentContainer
     
     private init() {
-        container = appDelegate.persistentContainer
-    }
+         persistentContainer = NSPersistentContainer(name: "PersonCoreData")
+         persistentContainer.loadPersistentStores { (storeDescription, error) in
+             if let error = error as NSError? {
+                 fatalError("Unresolved error \(error), \(error.userInfo)")
+             }
+         }
+     }
+    
+    func saveContext() {
+           let context = persistentContainer.viewContext
+           if context.hasChanges {
+               do {
+                   try context.save()
+               } catch {
+                   let nserror = error as NSError
+                   fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+               }
+           }
+       }
     
     // 1. Create
     func createPerson(name: String, age: String) {
-        let entity = NSEntityDescription.entity(forEntityName: "PersonCoreData", in: container.viewContext)
-        let person = NSManagedObject(entity: entity!, insertInto: container.viewContext)
+        let entity = NSEntityDescription.entity(forEntityName: "PersonCoreData", in: persistentContainer.viewContext)
+        let person = NSManagedObject(entity: entity!, insertInto: persistentContainer.viewContext)
         person.setValue(name, forKey: "name")
         person.setValue(age, forKey: "age")
         
-        appDelegate.saveContext()
+        saveContext()
     }
     
     
@@ -33,7 +49,7 @@ struct CoreDataManager {
         var personList: [PersonCoreData] = []
         
         do {
-            let fetchPersonList = try container.viewContext.fetch(PersonCoreData.fetchRequest())
+            let fetchPersonList = try persistentContainer.viewContext.fetch(PersonCoreData.fetchRequest())
             personList = fetchPersonList
         } catch {
             print("데이터를 가져오는 중 에러 발생: \(error)")
@@ -48,13 +64,12 @@ struct CoreDataManager {
         let fetchRequest = NSFetchRequest<PersonCoreData>(entityName: "PersonCoreData")
         
         do {
-            let result = try container.viewContext.fetch(fetchRequest)
+            let result = try persistentContainer.viewContext.fetch(fetchRequest)
             if index < result.count {
                 let personObject = result[index]
                 personObject.setValue(name, forKey: "name")
                 personObject.setValue(age, forKey: "age")
-                
-                try container.viewContext.save()
+                saveContext()
             } else {
                 print("Index out of bounds")
             }
@@ -66,8 +81,8 @@ struct CoreDataManager {
     
     // 4. Delete
     func deletePerson(person: PersonCoreData) {
-        container.viewContext.delete(person)
-        appDelegate.saveContext()
+        persistentContainer.viewContext.delete(person)
+        saveContext()
     }
     
     

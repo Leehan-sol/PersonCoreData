@@ -27,11 +27,6 @@ class MainViewController: UIViewController {
         mainView.showButton.addTarget(self, action: #selector(showButtonTapped), for: .touchUpInside)
     }
     
-    func setTextField() {
-        mainView.nameTextField.text = ""
-        mainView.ageTextField.text = ""
-    }
-    
     @objc private func addButtonTapped() {
         guard let name = mainView.nameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
               !name.isEmpty,
@@ -40,7 +35,7 @@ class MainViewController: UIViewController {
             print("이름이나 나이를 입력하세요")
             return
         }
-        CoreDataManager.manager.createPerson(name: name, age: age)
+        CoreDataManager.shared.createPerson(name: name, age: age)
         setTextField()
     }
     
@@ -49,7 +44,10 @@ class MainViewController: UIViewController {
         navigationController?.pushViewController(listVC, animated: true)
     }
     
-  
+    func setTextField() {
+        mainView.nameTextField.text = ""
+        mainView.ageTextField.text = ""
+    }
 
 }
 
