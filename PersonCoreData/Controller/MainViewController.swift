@@ -44,7 +44,7 @@ class MainViewController: UIViewController {
         navigationController?.pushViewController(listVC, animated: true)
     }
     
-    func setTextField() {
+    private func setTextField() {
         mainView.nameTextField.text = ""
         mainView.ageTextField.text = ""
     }

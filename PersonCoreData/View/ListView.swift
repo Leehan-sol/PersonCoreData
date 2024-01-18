@@ -8,6 +8,7 @@
 import UIKit
 
 class ListView: UIView {
+    
     let tableView: UITableView = {
         let tv = UITableView()
         tv.backgroundColor = .white
@@ -40,4 +41,5 @@ class ListView: UIView {
             tableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -10)
         ])
     }
+    
 }

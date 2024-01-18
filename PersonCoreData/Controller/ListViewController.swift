@@ -66,7 +66,7 @@ extension ListViewController: UITableViewDataSource {
         return cell
     }
     
-    func showAlert(index: Int) {
+    private func showAlert(index: Int) {
         let alertController = UIAlertController(title: "데이터 수정", message: nil, preferredStyle: .alert)
         
         alertController.addTextField { textField in
@@ -98,8 +98,6 @@ extension ListViewController: UITableViewDataSource {
         alertController.addAction(saveAction)
         self.present(alertController, animated: true, completion: nil)
     }
-    
-    
     
 }
 

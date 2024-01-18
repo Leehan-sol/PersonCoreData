@@ -60,7 +60,7 @@ class MainView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setUI() {
+    private func setUI() {
         self.backgroundColor = .systemBackground
         
         addSubview(nameLabel)
@@ -103,5 +103,6 @@ class MainView: UIView {
             showButton.leadingAnchor.constraint(equalTo: addButton.trailingAnchor, constant: 10)
         ])
     }
+    
 }
 

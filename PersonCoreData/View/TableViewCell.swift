@@ -8,6 +8,7 @@
 import UIKit
 
 class TableViewCell: UITableViewCell {
+    
     var editButtonClosure: (() -> Void)!
     
     let nameLabel: UILabel = {
@@ -59,13 +60,12 @@ class TableViewCell: UITableViewCell {
         ])
     }
     
-    func setAddTarget() {
+    private func setAddTarget() {
         editButton.addTarget(self, action: #selector(editButtonTapped), for: .touchUpInside)
     }
     
-    @objc func editButtonTapped() {
+    @objc private func editButtonTapped() {
         editButtonClosure()
     }
-    
     
 }
