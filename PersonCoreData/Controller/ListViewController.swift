@@ -35,6 +35,7 @@ class ListViewController: UIViewController {
 
 // MARK: - UITableViewDataSource
 extension ListViewController: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             if let person = personList?[indexPath.row] {
@@ -44,7 +45,7 @@ extension ListViewController: UITableViewDataSource {
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return personList.count
     }
@@ -54,43 +55,51 @@ extension ListViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        cell.editButton.addTarget(self, action: #selector(editButtonTapped(_:)), for: .touchUpInside)
-        
         cell.nameLabel.text = personList[indexPath.row].name
         cell.ageLabel.text = personList[indexPath.row].age
-
+        
+        cell.editButtonClosure = { [weak self] in
+            guard let self = self else { return }
+            self.showAlert(index: indexPath.row)
+        }
+        
         return cell
     }
     
-    @objc func editButtonTapped(_ sender: UIButton) {
-        let alertController = UIAlertController(title: "수정하기", message: nil, preferredStyle: .alert)
+    func showAlert(index: Int) {
+        let alertController = UIAlertController(title: "데이터 수정", message: nil, preferredStyle: .alert)
+        
         alertController.addTextField { textField in
             textField.placeholder = "이름"
         }
+        
         alertController.addTextField { textField in
             textField.placeholder = "나이"
         }
+        
         let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
-        let saveAction = UIAlertAction(title: "저장", style: .default) { [weak self] _ in
-            guard let self = self else { return }
-
-            if let newName = alertController.textFields?.first?.text?.trimmingCharacters(in: .whitespacesAndNewlines),
-               !newName.isEmpty,
-               let newAge = alertController.textFields?.last?.text?.trimmingCharacters(in: .whitespacesAndNewlines),
-               !newAge.isEmpty {
-                let currentName = newName
-                let predicate = NSPredicate(format: "name == %@", currentName)
-
-                CoreDataManager.manager.updatePerson(name: newName, age: newAge, predicate: predicate)
+        
+        let saveAction = UIAlertAction(title: "확인", style: .default) { _ in
+            guard let newName = alertController.textFields?[0].text,
+                  let newAge = alertController.textFields?[1].text,
+                  !newName.trimmingCharacters(in: .whitespaces).isEmpty,
+                  !newAge.trimmingCharacters(in: .whitespaces).isEmpty else {
+                alertController.textFields?[0].placeholder = "이름을 입력해 주세요."
+                alertController.textFields?[1].placeholder = "나이를 입력해 주세요."
+                return
             }
-            setPersonList()
+            
+            CoreDataManager.manager.updatePerson(name: newName, age: newAge, index: index)
+            self.setPersonList()
+            self.listView.tableView.reloadData()
         }
+        
         alertController.addAction(cancelAction)
         alertController.addAction(saveAction)
-        present(alertController, animated: true, completion: nil)
+        self.present(alertController, animated: true, completion: nil)
     }
     
-
+    
     
 }
 

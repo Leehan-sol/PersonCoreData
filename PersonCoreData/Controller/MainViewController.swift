@@ -37,7 +37,7 @@ class MainViewController: UIViewController {
               !name.isEmpty,
               let age = mainView.ageTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
               !age.isEmpty else {
-            print("Name or age is empty")
+            print("이름이나 나이를 입력하세요")
             return
         }
         CoreDataManager.manager.createPerson(name: name, age: age)

@@ -44,23 +44,21 @@ struct CoreDataManager {
     
     
     // 3. Update
-    func updatePerson(name: String, age: String, predicate: NSPredicate) {
-        let request = NSFetchRequest<PersonCoreData>(entityName: "PersonCoreData")
-        request.predicate = predicate
-        
-        do {
-            let fetchedPersons = try container.viewContext.fetch(request)
-            for person in fetchedPersons {
-                person.name = name
-                person.age = age
-            }
-            try container.viewContext.save()
-            print("업데이트 성공")
-        } catch {
-            print("업데이트 실패: \(error.localizedDescription)")
-        }
-    }
-    
+    func updatePerson(name: String, age: String, index: Int) {
+         let fetchRequest = NSFetchRequest<PersonCoreData>(entityName: "PersonCoreData")
+         
+         do {
+             let result = try container.viewContext.fetch(fetchRequest)
+             if let personObject = result[index] as? NSManagedObject {
+                 personObject.setValue(name, forKey: "name")
+                 personObject.setValue(age, forKey: "age")
+                 
+                 try container.viewContext.save()
+             }
+         } catch {
+             print("Failed to update person: \(error)")
+         }
+     }
     
     // 4. Delete
     func deletePerson(person: PersonCoreData) {

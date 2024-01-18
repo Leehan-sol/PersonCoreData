@@ -8,6 +8,7 @@
 import UIKit
 
 class TableViewCell: UITableViewCell {
+    var editButtonClosure: (() -> Void)!
     
     let nameLabel: UILabel = {
         let label = UILabel()
@@ -30,6 +31,7 @@ class TableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
+        setAddTarget()
     }
     
     required init?(coder: NSCoder) {
@@ -41,23 +43,29 @@ class TableViewCell: UITableViewCell {
         contentView.addSubview(ageLabel)
         contentView.addSubview(editButton)
         
-        // Constraints without SnapKit
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         ageLabel.translatesAutoresizingMaskIntoConstraints = false
         editButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            // nameLabel constraints
             nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             nameLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             
-            // ageLabel constraints
             ageLabel.leadingAnchor.constraint(equalTo: nameLabel.trailingAnchor, constant: 20),
             ageLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             
-            // editButton constraints
             editButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             editButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
         ])
     }
+    
+    func setAddTarget() {
+        editButton.addTarget(self, action: #selector(editButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc func editButtonTapped() {
+        editButtonClosure()
+    }
+    
+    
 }
