@@ -12,6 +12,7 @@ struct CoreDataManager {
     static let shared = CoreDataManager()
     private let persistentContainer: NSPersistentContainer
     
+    // 1. PersistentContainer 생성
     private init() {
          persistentContainer = NSPersistentContainer(name: "PersonCoreData")
          persistentContainer.loadPersistentStores { (storeDescription, error) in
@@ -22,10 +23,10 @@ struct CoreDataManager {
      }
     
     private func saveContext() {
-           let context = persistentContainer.viewContext
-           if context.hasChanges {
+        // Context에 내용 저장
+           if persistentContainer.viewContext.hasChanges {
                do {
-                   try context.save()
+                   try persistentContainer.viewContext.save()
                } catch {
                    let nserror = error as NSError
                    fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
@@ -33,18 +34,20 @@ struct CoreDataManager {
            }
        }
     
-    // 1. Create
+    // Create
     func createPerson(name: String, age: String) {
+        // 2. Context 기반으로 Entity 생성
         let entity = NSEntityDescription.entity(forEntityName: "PersonCoreData", in: persistentContainer.viewContext)
+        // 4. Entity를 기반으로 Object 생성
         let person = NSManagedObject(entity: entity!, insertInto: persistentContainer.viewContext)
+        // 5. Object에 값 setting
         person.setValue(name, forKey: "name")
         person.setValue(age, forKey: "age")
-        
         saveContext()
     }
     
     
-    // 2. Read
+    // Read
     func getPerson() -> [PersonCoreData]? {
         var personList: [PersonCoreData] = []
         
@@ -59,7 +62,7 @@ struct CoreDataManager {
     }
     
     
-    // 3. Update
+    // Update
     func updatePerson(name: String, age: String, index: Int) {
         let fetchRequest = NSFetchRequest<PersonCoreData>(entityName: "PersonCoreData")
         
@@ -79,7 +82,7 @@ struct CoreDataManager {
     }
 
     
-    // 4. Delete
+    // Delete
     func deletePerson(person: PersonCoreData) {
         persistentContainer.viewContext.delete(person)
         saveContext()

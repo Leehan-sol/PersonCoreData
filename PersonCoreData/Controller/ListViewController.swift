@@ -90,7 +90,6 @@ extension ListViewController: UITableViewDataSource {
             }
             
             CoreDataManager.shared.updatePerson(name: newName, age: newAge, index: index)
-            self.setPersonList()
             self.listView.tableView.reloadData()
         }
         
