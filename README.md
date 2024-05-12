@@ -20,5 +20,5 @@ CoreData에서 저장된 데이터를 사용하려면 먼저 해당 데이터 �
 5. **Object 생성**  <br/>
 Entity를 기반으로 객체를 생성하여 데이터를 추가하거나 수정할 수 있습니다. 이렇게 생성된 객체는 CoreData의 관리 아래에 있으며, 변경 사항을 추적하고 데이터베이스에 동기화합니다.
 
-6. **Persistant Container를 사용해서 데이터 저장 및 삭제 가능**  <br/>
+7. **Persistant Container를 사용해서 데이터 CRUD 가능**  <br/>
 데이터를 CoreData에 저장하려면 Persistant Container를 사용하여 Context를 저장하고 변경 사항을 커밋해야 합니다. 또한 데이터를 삭제하려면 Context에서 해당 객체를 삭제하고 변경 사항을 커밋하면 됩니다.
