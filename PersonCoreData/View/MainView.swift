@@ -19,6 +19,8 @@ class MainView: UIView {
         let tf = UITextField()
         tf.layer.borderWidth = 1.0
         tf.layer.cornerRadius = 10.0
+        tf.addLeftPadding(10)
+        tf.addRightPadding(10)
         return tf
     }()
     
@@ -32,22 +34,26 @@ class MainView: UIView {
         let tf = UITextField()
         tf.layer.borderWidth = 1.0
         tf.layer.cornerRadius = 10.0
+        tf.addLeftPadding(10)
+        tf.addRightPadding(10)
         return tf
     }()
     
     let addButton: UIButton = {
         let btn = UIButton()
-        btn.setTitle(" 추가하기 ", for: .normal)
+        btn.setTitle("  추가하기  ", for: .normal)
         btn.backgroundColor = .lightGray
         btn.setTitleColor(.black, for: .normal)
+        btn.layer.cornerRadius = 5
         return btn
     }()
     
     let showButton: UIButton = {
         let btn = UIButton()
-        btn.setTitle(" 데이터 ", for: .normal)
+        btn.setTitle("  데이터  ", for: .normal)
         btn.backgroundColor = .lightGray
         btn.setTitleColor(.black, for: .normal)
+        btn.layer.cornerRadius = 5
         return btn
     }()
     
@@ -102,6 +108,12 @@ class MainView: UIView {
             showButton.topAnchor.constraint(equalTo: ageTextField.bottomAnchor, constant: 100),
             showButton.leadingAnchor.constraint(equalTo: addButton.trailingAnchor, constant: 10)
         ])
+        
+        let padding: CGFloat = 10
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: padding, height: ageTextField.frame.height))
+        ageTextField.leftView = paddingView
+        ageTextField.leftViewMode = .always
+        
     }
     
 }

@@ -88,6 +88,7 @@ struct CoreDataManager {
     }
     
     
+    
     // Delete
     func deletePerson(person: PersonCoreData) {
         // 인덱스까지 가진 person이라는 매개변수를 받아서 삭제만 실행

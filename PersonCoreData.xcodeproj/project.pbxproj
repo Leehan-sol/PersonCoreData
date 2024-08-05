@@ -21,6 +21,7 @@
 		CCBC04622B5699F800677608 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBC04612B5699F800677608 /* ListViewController.swift */; };
 		CCBC04642B569A0300677608 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBC04632B569A0300677608 /* TableViewCell.swift */; };
 		CCBC04662B569D3000677608 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBC04652B569D3000677608 /* CoreDataManager.swift */; };
+		CCFD6FEA2C60B7AB00469181 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFD6FE92C60B7AB00469181 /* UITextField+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		CCBC04612B5699F800677608 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		CCBC04632B569A0300677608 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		CCBC04652B569D3000677608 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		CCFD6FE92C60B7AB00469181 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 			children = (
 				CCBC04282B56992900677608 /* AppDelegate.swift */,
 				CCBC042A2B56992900677608 /* SceneDelegate.swift */,
+				CCFD6FEB2C60B7B400469181 /* Extension */,
 				CCBC04682B569D8000677608 /* Model */,
 				CCBC04672B569D3500677608 /* View */,
 				CCBC04692B569D9F00677608 /* Controller */,
@@ -164,6 +167,14 @@
 				CCBC04612B5699F800677608 /* ListViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		CCFD6FEB2C60B7B400469181 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				CCFD6FE92C60B7AB00469181 /* UITextField+.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -297,6 +308,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCBC04332B56992900677608 /* PersonCoreData.xcdatamodeld in Sources */,
+				CCFD6FEA2C60B7AB00469181 /* UITextField+.swift in Sources */,
 				CCBC04642B569A0300677608 /* TableViewCell.swift in Sources */,
 				CCBC045C2B5699A800677608 /* MainView.swift in Sources */,
 				CCBC04602B5699D700677608 /* ListView.swift in Sources */,
